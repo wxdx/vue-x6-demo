@@ -1,3 +1,5 @@
 module.exports = {
-  lintOnSave: false
+  lintOnSave: false,
+  outputDir: 'docs',
+  publicPath:"/vue-x6-demo"
 }
