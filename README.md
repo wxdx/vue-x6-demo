@@ -1,24 +1,11 @@
-# x6-demo
+# vue-x6-demo
 
-## Project setup
-```
-npm install
-```
+# 简介
+  该demo基于 vue、antv-x6、element-ui开发的dag图编辑器demo；
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+[在线demo](https://wxdx.github.io/vue-x6-demo/index.html)
 
-### Lints and fixes files
-```
-npm run lint
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+
+
