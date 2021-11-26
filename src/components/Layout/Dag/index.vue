@@ -16,6 +16,12 @@
             <el-button size="small" @click="getJSONData">
                 输出JSON
             </el-button>
+            <el-button size="small" @click="runHandle">
+                执行
+            </el-button>
+            <el-button size="small" @click="stopHandle">
+                停止
+            </el-button>
         </div>
         <div :id="id">
         </div>
@@ -27,9 +33,14 @@
 import {
     Graph,
     Addon,
+    Shape,
     DataUri
 } from '@antv/x6';
-import _ from '../../../config/customNode'
+import _ from '../../../config/custom-node';
+import insertCss from 'insert-css'
+import {
+    DagEdge
+} from '../../../config/custom-edge';
 export default {
     name: 'Dag',
     props: {
@@ -61,16 +72,27 @@ export default {
                     modifiers: ['ctrl', 'meta'],
                 },
                 connecting: {
+                    snap: true, //连线的过程中距离节点或者连接桩 50px 时会触发自动吸附，
                     allowBlank: false, //是否允许连接到画布空白位置的点
                     connector: 'smooth', //设置线段类型
                     allowLoop: false, //是否允许创建循环连线
                     highlight: true,
-                    anchor: {
-                        name: 'midSide',
+                    createEdge() { //自定义默认边
+                        return new DagEdge()
+                    },
+                    sourceAnchor: {
+                        name: 'bottom',
                         args: {
-                            dx: 10,
+                            dx: 0,
                         },
                     },
+                    targetAnchor: {
+                        name: 'center',
+                        args: {
+                            dx: 0,
+                        },
+                    },
+                    connector: 'algo-edge',
                 },
                 snapline: true,
                 background: {
@@ -114,7 +136,7 @@ export default {
             const pythonNode = this.graph.createNode({
                 shape: 'python-node-rect'
             })
-            this.stencil.load([sqlNode,shellNode,flinkNode,sparkNode,pythonNode], 'group1')
+            this.stencil.load([sqlNode, shellNode, flinkNode, sparkNode, pythonNode], 'group1')
 
             this.graph.on('node:added', ({
                 node,
@@ -125,76 +147,66 @@ export default {
                 console.log(index)
                 console.log(options)
             })
+            this.graph.on('edge:connected', (args) => {
+                const edge = args.edge
+                const node = args.currentCell
+                const elem = args.currentMagnet
+                const portId = elem.getAttribute('port')
 
-            // this.graph.addNode({
-            //     id: 'node3',
-            //     shape: 'rect', // 指定使用何种图形，默认值为 'rect'
-            //     x: 300,
-            //     y: 200,
-            //     width: 80,
-            //     height: 40,
-            //     // angle: 30,
-            //     attrs: {
-            //         body: {
-            //             fill: 'blue',
-            //         },
-            //         label: {
-            //             text: 'Hello',
-            //             fill: 'white',
-            //         },
-            //     },
-            //     ports: {
-            //         groups: {
-            //             // 输入链接桩群组定义
-            //             in: {
-            //                 position: 'top',
-            //                 attrs: {
-            //                     circle: {
-            //                         r: 6,
-            //                         magnet: true,
-            //                         stroke: '#31d0c6',
-            //                         strokeWidth: 2,
-            //                         fill: '#fff',
-            //                     },
-            //                 },
-            //             },
-            //             // 输出链接桩群组定义
-            //             out: {
-            //                 position: 'bottom',
-            //                 attrs: {
-            //                     circle: {
-            //                         r: 6,
-            //                         magnet: true,
-            //                         stroke: '#31d0c6',
-            //                         strokeWidth: 2,
-            //                         fill: '#fff',
-            //                     },
-            //                 },
-            //             },
-            //         },
-            //         items: [{
-            //                 id: 'port1',
-            //                 group: 'in',
-            //             },
-            //             {
-            //                 id: 'port2',
-            //                 group: 'out',
-            //             },
-            //         ],
-            //     },
-            // })
+                // 触发 port 重新渲染
+                node.setPortProp(portId, 'connected', true)
 
-            // this.graph.addEdge({
-            //     shape: 'edge', // 指定使用何种图形，默认值为 'edge'
-            //     source: {
-            //         cell: 'node2',
-            //         port: 'port2'
-            //     }, // 源节点和链接桩 ID
-            //     target: {
-            //         cell: 'node3',
-            //         port: 'port1'
-            //     }, // 目标节点 ID 和链接桩 ID
-            // })
+                // 更新连线样式
+                edge.attr({
+                    line: {
+                        strokeDasharray: '',
+                    },
+                })
+            })
+            this.graph.on('node:mouseenter', () => {
+                this.changePortsVisible(true)
+            })
+
+            this.graph.on('node:mouseleave', () => {
+                this.changePortsVisible(false)
+            })
+        },
+        runHandle() {
+            const edges = this.graph.getEdges()
+            edges.forEach(edge => {
+                edge.attr({
+                    line: {
+                        strokeDasharray: '5',
+                        style: {
+                            animation: 'ant-line 30s infinite linear',
+                        },
+                    },
+                })
+
+            });
+            insertCss(`
+                        @keyframes ant-line {
+                            to {
+                                stroke-dashoffset: -1000
+                            }
+                        }
+                `)
+        },
+        stopHandle() {
+            const edges = this.graph.getEdges()
+            edges.forEach(edge => {
+                edge.attr({
+                    line: {
+                        strokeDasharray: '',
+                    },
+                })
+            });
+        },
+        changePortsVisible(visible) {
+            const ports = document.getElementById(this.id).querySelectorAll('.x6-port-body')
+            for (let i = 0, len = ports.length; i < len; i = i + 1) {
+                ports[i].style.visibility = visible ? 'visible' : 'hidden'
+            }
         },
         exportPng() {
             this.graph.toPNG((dataUri) => {

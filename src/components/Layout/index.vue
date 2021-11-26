@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import Dag from './Dag'
+import Dag from './dag'
 export default {
-    name: 'Layout',
+    name: 'layout',
     components: {
         Dag
     },

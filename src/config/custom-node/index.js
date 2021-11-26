@@ -56,6 +56,9 @@ export const SqlNodeRect = Graph.registerNode('sql-node-rect', {
                     stroke: '#31d0c6',
                     strokeWidth: 2,
                     fill: '#fff',
+                    style: {
+                      visibility: 'hidden',
+                    },
                 },
             },
         },
@@ -69,6 +72,9 @@ export const SqlNodeRect = Graph.registerNode('sql-node-rect', {
                     stroke: '#31d0c6',
                     strokeWidth: 2,
                     fill: '#fff',
+                    style: {
+                      visibility: 'hidden',
+                    },
                 },
             },
         },
@@ -140,6 +146,9 @@ export const ShellNodeRect = Graph.registerNode('shell-node-rect', {
                       stroke: '#31d0c6',
                       strokeWidth: 2,
                       fill: '#fff',
+                      style: {
+                        visibility: 'hidden',
+                      },
                   },
               },
           },
@@ -153,6 +162,9 @@ export const ShellNodeRect = Graph.registerNode('shell-node-rect', {
                       stroke: '#31d0c6',
                       strokeWidth: 2,
                       fill: '#fff',
+                      style: {
+                        visibility: 'hidden',
+                      },
                   },
               },
           },
@@ -224,6 +236,9 @@ export const ShellNodeRect = Graph.registerNode('shell-node-rect', {
                       stroke: '#31d0c6',
                       strokeWidth: 2,
                       fill: '#fff',
+                      style: {
+                        visibility: 'hidden',
+                      },
                   },
               },
           },
@@ -237,6 +252,9 @@ export const ShellNodeRect = Graph.registerNode('shell-node-rect', {
                       stroke: '#31d0c6',
                       strokeWidth: 2,
                       fill: '#fff',
+                      style: {
+                        visibility: 'hidden',
+                      },
                   },
               },
           },
@@ -308,6 +326,9 @@ export const ShellNodeRect = Graph.registerNode('shell-node-rect', {
                       stroke: '#31d0c6',
                       strokeWidth: 2,
                       fill: '#fff',
+                      style: {
+                        visibility: 'hidden',
+                      },
                   },
               },
           },
@@ -321,6 +342,9 @@ export const ShellNodeRect = Graph.registerNode('shell-node-rect', {
                       stroke: '#31d0c6',
                       strokeWidth: 2,
                       fill: '#fff',
+                      style: {
+                        visibility: 'hidden',
+                      },
                   },
               },
           },
@@ -392,6 +416,9 @@ export const ShellNodeRect = Graph.registerNode('shell-node-rect', {
                       stroke: '#31d0c6',
                       strokeWidth: 2,
                       fill: '#fff',
+                      style: {
+                        visibility: 'hidden',
+                      },
                   },
               },
           },
@@ -405,6 +432,9 @@ export const ShellNodeRect = Graph.registerNode('shell-node-rect', {
                       stroke: '#31d0c6',
                       strokeWidth: 2,
                       fill: '#fff',
+                      style: {
+                        visibility: 'hidden',
+                      },
                   },
               },
           },

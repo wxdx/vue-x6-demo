@@ -12,6 +12,7 @@
     "@antv/x6-vue-shape": "^1.2.10",
     "core-js": "^3.6.5",
     "element-ui": "^2.15.6",
+    "insert-css": "^2.0.0",
     "vue": "^2.6.11"
   },
   "devDependencies": {
