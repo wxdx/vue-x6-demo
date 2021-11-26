@@ -74,24 +74,24 @@ export default {
                 connecting: {
                     snap: true, //连线的过程中距离节点或者连接桩 50px 时会触发自动吸附，
                     allowBlank: false, //是否允许连接到画布空白位置的点
-                    connector: 'smooth', //设置线段类型
+                    // connector: 'smooth', //设置线段类型
                     allowLoop: false, //是否允许创建循环连线
                     highlight: true,
                     createEdge() { //自定义默认边
                         return new DagEdge()
                     },
-                    sourceAnchor: {
-                        name: 'bottom',
-                        args: {
-                            dx: 0,
-                        },
-                    },
-                    targetAnchor: {
-                        name: 'center',
-                        args: {
-                            dx: 0,
-                        },
-                    },
+                    // sourceAnchor: {
+                    //     name: 'bottom',
+                    //     args: {
+                    //         dx: 0,
+                    //     },
+                    // },
+                    // targetAnchor: {
+                    //     name: 'center',
+                    //     args: {
+                    //         dx: 0,
+                    //     },
+                    // },
                     connector: 'algo-edge',
                 },
                 snapline: true,
@@ -153,15 +153,14 @@ export default {
                 const elem = args.currentMagnet
                 const portId = elem.getAttribute('port')
 
-                // 触发 port 重新渲染
-                node.setPortProp(portId, 'connected', true)
-
-                // 更新连线样式
-                edge.attr({
-                    line: {
-                        strokeDasharray: '',
-                    },
-                })
+                // // 触发 port 重新渲染
+                // node.setPortProp(portId, 'connected', true)
+                // // 更新连线样式
+                // edge.attr({
+                //     line: {
+                //         strokeDasharray: '',
+                //     },
+                // })
             })
             this.graph.on('node:mouseenter', () => {
                 this.changePortsVisible(true)

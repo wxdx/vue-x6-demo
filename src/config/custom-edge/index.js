@@ -4,7 +4,7 @@ export const DagEdge = Graph.registerEdge('dag-edge', {
     inherit: 'edge',
     attrs: {
         line: {
-            strokeDasharray: '5 5',
+            // strokeDasharray: '5 5',
             stroke: '#808080',
             strokeWidth: 1,
             targetMarker: {
