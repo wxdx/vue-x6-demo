@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import Layout from './components/layout'
+import Layout from "./components/layout";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    Layout
-  }
-}
+    Layout,
+  },
+};
 </script>
 
 <style>
